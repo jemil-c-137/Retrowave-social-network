@@ -1,0 +1,18 @@
+
+.nav {
+  grid-area: nav;
+  background-color: #2e2a5d;
+  box-shadow: -11px 5px 13px 1px rgba(255,212,255,1);
+  padding: 0 20px;
+  border-right: teal 3px solid;
+}
+
+.item a {
+  text-decoration: none;
+  color: plum;
+  font-size: 20px;
+}
+
+.item a.active {
+  color: rebeccapurple;
+}

@@ -1,0 +1,15 @@
+
+.content img {
+  width: 100%;
+  max-width: 1000px;
+  max-height: 200px;
+}
+
+.item {
+  color: white;
+  font-size: 16px;
+}
+
+.back {
+  background-color: darkgray;
+}

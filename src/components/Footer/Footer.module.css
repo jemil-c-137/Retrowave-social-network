@@ -1,0 +1,12 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: footer;
+  background-color: #140D27;
+  border-top: 3px teal solid;
+  box-shadow: 6px 10px 13px 1px  rgba(255,212,255,1);
+  color: plum;
+  font-size: 20px;
+  border-bottom-right-radius: 10px;
+}

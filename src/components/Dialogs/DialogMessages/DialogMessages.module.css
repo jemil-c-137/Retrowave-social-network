@@ -1,0 +1,23 @@
+.message {
+  width: auto;
+  max-width: 200px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #faedfa;
+  color: #2E2A5D;
+  font-weight: bold;
+  margin-right: 5%;
+}
+
+.message_wrapper {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+}
+
+.avatar {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}

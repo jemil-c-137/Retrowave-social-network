@@ -1,0 +1,60 @@
+*, *:after, :before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.dialoguesWrapper {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  height: 100%;
+}
+
+.dialogues {
+  padding: 10px 20px;
+
+}
+
+.dialogues a {
+  font-size: 16px;
+  text-decoration: none;
+  color: #ffd4ff;
+  font-weight: bold;
+}
+
+.messages_wrapper {
+  display: grid;
+  grid-template-rows: 4fr 1fr;
+}
+
+.messages {
+  height: 100%;
+  padding: 10px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sendMessage {
+  padding: 0 10px;
+  justify-self: flex-start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textArea {
+  background-color: #ffd4ff;
+  border: none;
+  border-radius: 3px;
+  height: 50%;
+}
+
+.sendButton {
+  padding: 0 5px;
+  color: #140D27;
+  border: none;
+  background-color: plum;
+  border-radius: 3px;
+  height: 50%;
+}
+

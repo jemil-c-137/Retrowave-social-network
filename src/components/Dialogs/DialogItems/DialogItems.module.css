@@ -1,0 +1,17 @@
+.dialog {
+ display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.dialog.active {
+  color: plum;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  display: block;
+  border-radius: 50%;
+  margin-right: 5%;
+}
