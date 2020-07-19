@@ -10,26 +10,33 @@ import Music from "./components/Music";
 import News from "./components/News";
 import Footer from "./components/Footer";
 
-
-
-
 const App = (props) => {
   return (
     <BrowserRouter>
       <div className="app-wrapper">
         <Header />
-        <Navbar state={props.state.messagesPage}/>
+        <Navbar messagesPage={props.state.messagesPage} />
         <div className="app-wrapper-content">
-          <Route path='/dialogues'
-                 render={() => <Dialogues state={props.state.messagesPage} />}/>
+          <Route path='/dialogues' render={() => <Dialogues
+            addMessage={props.addMessage}
+            messagesPage={props.state.messagesPage}
+            newMessageText={props.newMessageText}/>}
+          />
           <Route path='/profile'
-                 render={() => <Profile addPost={props.addPost} state={props.state.profilePage}/>}/>
+                 render={() =>
+                   <Profile addPost={props.addPost}
+                            newPostText={props.newPostText}
+                            profilePage={props.state.profilePage} />}
+          />
           <Route path='/news'
-                 render={() => <News />} />
+                 render={() => <News />}
+          />
           <Route path='/music'
-                 render={() => <Music />} />
+                 render={() => <Music />}
+          />
           <Route path={'/settings'}
-                 render={() => <Settings />} />
+                 render={() => <Settings />}
+          />
         </div>
         <Footer />
       </div>
