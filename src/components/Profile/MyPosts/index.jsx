@@ -3,28 +3,23 @@ import classes from './MyPosts.module.css';
 import Post from "./Post";
 
 const MyPosts = (props) => {
-  let posts = props.profilePage.postsData.map(post => <Post value={post.text} count={post.value} />)
+  let posts = props.posts.postsData.map(post => <Post value={post.text} count={post.value} />)
 
-  let newPost = React.createRef();
-
-  let printPost = () => {
-    console.log(props)
-    props.addPost();
-    props.newPostText('');
+  let onAddPost = () => {
+    props.addPost()
   }
-
-  let onAreaChange = () => {
-    let text = newPost.current.value;
-    props.newPostText(text)
+  let onAreaChange = (e) => {
+    let text = e.target.value
+    props.updateNewPostText(text)
   }
   return(
     <div> My posts
       <div className={classes.wrapper}>
         <textarea
-          ref={newPost}
+          placeholder={'Your post text'}
           onChange={onAreaChange}
-          value={props.profilePage.newAreaText}> </textarea>
-        <button onClick={ printPost } className={classes.button}> Add post</button>
+          value={props.posts.newAreaText}> </textarea>
+        <button onClick={ onAddPost } className={classes.button}> Add post</button>
       </div>
       <div>
         {posts}

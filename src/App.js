@@ -3,30 +3,24 @@ import './App.css';
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import Profile from "./components/Profile";
-import Dialogues from "./components/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import Settings from "./components/Settings";
 import Music from "./components/Music";
 import News from "./components/News";
 import Footer from "./components/Footer";
+import DialoguesContainer from "./components/Dialogs/DialogsContainer";
 
 const App = (props) => {
   return (
     <BrowserRouter>
       <div className="app-wrapper">
         <Header />
-        <Navbar messagesPage={props.state.messagesPage} />
+        <Navbar  />
         <div className="app-wrapper-content">
-          <Route path='/dialogues' render={() => <Dialogues
-            addMessage={props.addMessage}
-            messagesPage={props.state.messagesPage}
-            newMessageText={props.newMessageText}/>}
+          <Route path='/dialogues' render={() => <DialoguesContainer
+            />}
           />
-          <Route path='/profile'
-                 render={() =>
-                   <Profile addPost={props.addPost}
-                            newPostText={props.newPostText}
-                            profilePage={props.state.profilePage} />}
+          <Route path='/profile' render={() => <Profile  />}
           />
           <Route path='/news'
                  render={() => <News />}
@@ -46,3 +40,6 @@ const App = (props) => {
 }
 
 export default App;
+
+// messagesPage={props.state.messagesPage}
+// store={props.store}
