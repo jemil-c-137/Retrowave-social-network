@@ -7,8 +7,8 @@ import Message from "./DialogMessages";
 
 const Dialogues = (props) => {
 
-  let dialogElements = props.messages.dialogsData.map( dialog => <DialogueItem name={dialog.name} id={dialog.id} ava={dialog.avatar}/> )
-  let dialogMessages = props.messages.messageData.map( message => <Message text={message.message}/>)
+  let dialogElements = props.messagesPage.dialogsData.map( dialog => <DialogueItem name={dialog.name} id={dialog.id} ava={dialog.avatar}/> )
+  let dialogMessages = props.messagesPage.messageData.map( message => <Message text={message.message}/>)
 
   let addMessage = () => {
     props.sendMessage()
@@ -30,7 +30,7 @@ const Dialogues = (props) => {
           {dialogMessages}
         </div>
         <div className={styles.sendMessage}>
-          <textarea className={styles.textArea} placeholder={'Your message'} onChange={onMessageChange} value={props.messages.newMessageText}> </textarea>
+          <textarea className={styles.textArea} placeholder={'Your message'} onChange={onMessageChange} value={props.messagesPage.newMessageText}> </textarea>
           <button className={styles.sendButton} onClick={addMessage}>Send</button>
         </div>
       </div>

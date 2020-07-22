@@ -1,13 +1,13 @@
 import React from "react";
 import Friends from "./Friends";
-import StoreContext from "../../../Redux/Store-Context";
+import {connect} from "react-redux";
+
+/*
 
 const Sidebar = (props) => {
   return(
     <div>
       <StoreContext.Consumer>
-        {store => {
-          console.log(store)
           return (
             <Friends user={store.getState().messagesPage.dialogsData}/>
           )
@@ -17,5 +17,15 @@ const Sidebar = (props) => {
     </div>
   )
 }
+*/
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.messagesPage.dialogsData
+  }
+}
+
+
+const Sidebar = connect(mapStateToProps)(Friends)
 
 export default Sidebar

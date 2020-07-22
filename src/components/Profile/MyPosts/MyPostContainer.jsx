@@ -2,7 +2,9 @@ import React from "react";
 
 import {addPostActionCreator, updateNewAreaTextActionCreator} from "../../../Redux/profileReducer";
 import MyPosts from "./index";
-import StoreContext from "../../../Redux/Store-Context";
+import {connect} from "react-redux";
+
+/*
 
 const MyPostsContainer = (props) => {
   return(
@@ -25,5 +27,25 @@ const MyPostsContainer = (props) => {
     </StoreContext.Consumer>
   )
 }
+*/
+
+const mapStateToProps = (state) => {
+  return {
+    posts: state.profilePage
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAreaChange: (text) => {
+      dispatch(updateNewAreaTextActionCreator(text))
+    },
+    addPost: () => {
+      dispatch(addPostActionCreator())
+    }
+  }
+}
+
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 
 export default MyPostsContainer
