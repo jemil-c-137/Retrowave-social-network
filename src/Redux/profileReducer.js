@@ -1,7 +1,9 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_AREA_TEXT = "UPDATE-NEW-AREA-TEXT";
+const SET_USER_PROFILE ="SET_USER_PROFILE";
 
 let initialState = {
+
   postsData: [
     {id:1, text: "Hello", value: 23},
     {id:2, text: "Ooweee", value: 43},
@@ -13,6 +15,7 @@ let initialState = {
     {id:6, text: "Bye", value: 1984}
   ],
   newAreaText: "",
+  profile: null,
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -34,6 +37,9 @@ const profileReducer = (state = initialState, action) => {
       stateCopy.newAreaText = action.newSymbol;
       return stateCopy
     }
+    case SET_USER_PROFILE: {
+      return  {...state, profile: action.profile}
+    }
     default:
       return state
   }
@@ -41,5 +47,7 @@ const profileReducer = (state = initialState, action) => {
 
 export const addPostActionCreator = () => ( {type: ADD_POST} )
 export const updateNewAreaTextActionCreator = (text) => ( {type: UPDATE_NEW_AREA_TEXT, newSymbol: text} )
+export const setUserProfile = (profile) => (  {type: SET_USER_PROFILE, profile } )
+
 
 export default profileReducer

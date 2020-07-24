@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import {Provider} from "react-redux";
 
-let rerenderEntireTree = () => {
+//let rerenderEntireTree = () => {
   ReactDOM.render(
     <React.StrictMode>
       <Provider store={store}>
@@ -14,12 +14,15 @@ let rerenderEntireTree = () => {
     </React.StrictMode>,
     document.getElementById('root')
   );
-}
-rerenderEntireTree()
+//}
+/*
 
+rerenderEntireTree()
+debugger;
 store.subscribe(() => {
   rerenderEntireTree()
 })
+*/
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

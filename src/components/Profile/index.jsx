@@ -1,16 +1,19 @@
 import React from "react";
-import classes from './Profile.module.css';
+
 import User from "./User";
 import MyPostsContainer from "./MyPosts/MyPostContainer";
 
 
+
 const Profile = (props) => {
-  return (
-    <main className={classes.content}>
-      <User/>
-      <MyPostsContainer store={props.store} />
-    </main>
-  )
+
+    return (
+      <main >
+        <User profile={props.profile}/>
+        <MyPostsContainer/>
+      </main>
+    )
+
 }
 
 export default Profile

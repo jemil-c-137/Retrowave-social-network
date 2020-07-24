@@ -1,16 +1,25 @@
 import React from "react";
 import classes from './User.module.css'
+import Preloader from "../../common/Preloader";
 
-const User = () => {
+const User = (props) => {
+
+  if (!props.profile) {
+    return (
+      <Preloader />
+    )
+  }
+
   return (
+
     <div className={classes.container}>
       <div className={classes.avatar}>
-        <img src="https://cs8.pikabu.ru/post_img/big/2016/09/17/6/1474102501152890619.jpg" alt=""/>
+        <img src={props.profile.photos.large} alt=""/>
       </div>
       <div>
-        <p className={`${classes.text} ${classes.title}`}>Jemil Suleimanov</p>
-        <p className={classes.text}>Date of Birth</p>
-        <p className={classes.text}>City Minsk</p>
+        <p className={`${classes.text} ${classes.title}`}>{props.profile.fullName}</p>
+        <p className={classes.text}>{props.profile.aboutMe}</p>
+        <p className={classes.text}>{props.profile.lookingForAJob ? props.profile.lookingForAJobDescription : ''}</p>
         <p className={classes.text}>Education: MIT'20</p>
         <p className={classes.text}>website: it-kamasutra.com</p>
       </div>
