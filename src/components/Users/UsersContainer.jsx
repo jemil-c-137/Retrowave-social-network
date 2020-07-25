@@ -8,7 +8,7 @@ import {
   followUser,
   setCurrentPage,
   setTotalUsersCount,
-  setUsers,
+  setUsers, toggleFollowingProgress,
   toggleIsFetching,
   unFollow
 } from "../../Redux/users-reducer";
@@ -18,11 +18,11 @@ import {getUsers} from "../../api/api";
 class UsersAPIComponent extends React.Component {
 
   componentDidMount() {
-    debugger;
+
     if (this.props.users.length === 0) {
 
       getUsers(this.props.currentPage, this.props.pageSize).then(response => {
-        debugger;
+
           this.props.toggleIsFetching(false)
           this.props.setUsers(response.items);
           this.props.setTotalUsersCount(response.totalCount)
@@ -36,7 +36,7 @@ class UsersAPIComponent extends React.Component {
     this.props.setCurrentPage(p);
     this.props.toggleIsFetching(true)
     getUsers(p, this.props.pageSize).then(response => {
-      debugger
+
         this.props.toggleIsFetching(false)
         this.props.setUsers(response.items)
       })
@@ -56,6 +56,10 @@ class UsersAPIComponent extends React.Component {
                users={this.props.users}
                unFollow={this.props.unFollow}
                followUser={this.props.followUser}
+
+               usersInProgress={this.props.usersInProgress}
+               toggleFollowing={this.props.toggleFollowingProgress}
+               followingInProgress={this.props.followingInProgress}
         />
       </>
     )
@@ -63,12 +67,16 @@ class UsersAPIComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+
   return {
     users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
+    followingInProgress: state.usersPage.followingInProgress,
+    usersInProgress: state.usersPage.usersInProgress
+
   }
 }
 
@@ -77,7 +85,8 @@ let mapDispatchToProps = {
   followUser, unFollow, setUsers,
   setCurrentPage,
   setTotalUsersCount,
-  toggleIsFetching
+  toggleIsFetching,
+  toggleFollowingProgress
 }
 const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
 

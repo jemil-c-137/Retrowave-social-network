@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./Users.module.css";
 import {NavLink} from "react-router-dom";
-import * as axios from "axios";
+
+import {APIfollow, APIunfollow} from "../../api/api";
 
 let Users = (props) => {
   let pagesCount = Math.ceil((props.totalUsersCount / props.pageSize) / 100);
@@ -12,7 +13,7 @@ let Users = (props) => {
   return (
     <div>
       <div>
-        {pages.map( page => {
+        {pages.map(page => {
             return <span
               onClick={() => props.onPageChanged(page)}
               className={props.currentPage === page && styles.selectedPage}>{page}</span>
@@ -33,31 +34,30 @@ let Users = (props) => {
               </div>
               <div>
                 {user.followed
-                  ? <button onClick={() => {
-                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                      {withCredentials: true,
-                      headers: {"apy-key": "2af87a02-ed46-4c8e-8dc4-d8f4cbd4501f"}
-                      })
+
+                  ? <button className={styles.btn} disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
+
+                    props.toggleFollowing(true, user.id)
+                    APIunfollow(user.id)
                       .then(response => {
-                        if(!response.data.resultCode == 0) {
+                        props.toggleFollowing(false, user.id)
+                        if (response.data.resultCode === 0) {
+
                           props.unFollow(user.id)
                         }
+
                       })
-
-
                   }}>unfollow</button>
 
-                  : <button onClick={() => {
+                  : <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
+                    props.toggleFollowing(true, user.id)
+                    APIfollow(user.id).then(response => {
+                      if (response.data.resultCode === 0) {
 
-                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {},
-                      {withCredentials: true,
-                        headers: {'api-key': '2af87a02-ed46-4c8e-8dc4-d8f4cbd4501f'}
-                      })
-                      .then(response => {
-                        if(response.data.resultCode == 0) {
-                          props.followUser(user.id)
-                        }
-                      })
+                        props.followUser(user.id)
+                      }
+                      props.toggleFollowing(false, user.id)
+                    })
                   }}>follow</button>}
               </div>
             </div>
