@@ -2,7 +2,7 @@ import * as axios from 'axios'
 
 const APIurl = 'https://social-network.samuraijs.com/api/1.0/';
 
-export const getUsers = (currentPage, pageSize) => {
+export const APIgetUsers = (currentPage, pageSize) => {
 
   return axios.get(APIurl + `users?page=${currentPage}&count${pageSize}`,
     {
@@ -34,4 +34,8 @@ export const APIfollow = (userId) => {
     {withCredentials: true,
       headers: {'api-key': '2af87a02-ed46-4c8e-8dc4-d8f4cbd4501f'}
     })
+}
+
+export const APIsetUserProfile = (userId) => {
+  return axios.get(APIurl + `profile/${userId}`)
 }

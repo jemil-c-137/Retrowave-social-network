@@ -36,7 +36,8 @@ let Users = (props) => {
                 {user.followed
 
                   ? <button className={styles.btn} disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
-
+                    props.unFollowThunk(user.id)
+/*
                     props.toggleFollowing(true, user.id)
                     APIunfollow(user.id)
                       .then(response => {
@@ -46,18 +47,20 @@ let Users = (props) => {
                           props.unFollow(user.id)
                         }
 
-                      })
+                      })*/
                   }}>unfollow</button>
 
                   : <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
-                    props.toggleFollowing(true, user.id)
+                    props.followThunk(user.id)
+
+                   /* props.toggleFollowing(true, user.id)
                     APIfollow(user.id).then(response => {
                       if (response.data.resultCode === 0) {
 
                         props.followUser(user.id)
                       }
                       props.toggleFollowing(false, user.id)
-                    })
+                    })*/
                   }}>follow</button>}
               </div>
             </div>

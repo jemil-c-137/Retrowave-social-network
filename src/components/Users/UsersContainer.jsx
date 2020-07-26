@@ -5,41 +5,27 @@ import {connect} from "react-redux";
 import Users from "./Users";
 import Preloader from "../common/Preloader";
 import {
-  followUser,
+  followThunk,
+  followUser, getUsersThunkCreator,
   setCurrentPage,
   setTotalUsersCount,
   setUsers, toggleFollowingProgress,
   toggleIsFetching,
-  unFollow
+  unFollow, unFollowThunk
 } from "../../Redux/users-reducer";
-import {getUsers} from "../../api/api";
+import {withAuthRedirect} from "../hoc/authRedirect";
+
 
 
 class UsersAPIComponent extends React.Component {
 
   componentDidMount() {
-
-    if (this.props.users.length === 0) {
-
-      getUsers(this.props.currentPage, this.props.pageSize).then(response => {
-
-          this.props.toggleIsFetching(false)
-          this.props.setUsers(response.items);
-          this.props.setTotalUsersCount(response.totalCount)
-        })
-    }
-
+    this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
   }
 
   onPageChanged = (p) => {
+  this.props.getUsersThunkCreator(p, this.props.pageSize)
 
-    this.props.setCurrentPage(p);
-    this.props.toggleIsFetching(true)
-    getUsers(p, this.props.pageSize).then(response => {
-
-        this.props.toggleIsFetching(false)
-        this.props.setUsers(response.items)
-      })
   }
 
   render() {
@@ -58,7 +44,8 @@ class UsersAPIComponent extends React.Component {
                followUser={this.props.followUser}
 
                usersInProgress={this.props.usersInProgress}
-               toggleFollowing={this.props.toggleFollowingProgress}
+               followThunk={this.props.followThunk}
+               unFollowThunk={this.props.unFollowThunk}
                followingInProgress={this.props.followingInProgress}
         />
       </>
@@ -86,8 +73,10 @@ let mapDispatchToProps = {
   setCurrentPage,
   setTotalUsersCount,
   toggleIsFetching,
-  toggleFollowingProgress
+  toggleFollowingProgress,
+  getUsersThunkCreator,
+  followThunk,
+  unFollowThunk,
 }
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
+export default withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent))
 
-export default UsersContainer

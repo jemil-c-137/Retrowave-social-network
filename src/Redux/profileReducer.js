@@ -1,3 +1,5 @@
+import {APIsetUserProfile} from "../api/api";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_AREA_TEXT = "UPDATE-NEW-AREA-TEXT";
 const SET_USER_PROFILE ="SET_USER_PROFILE";
@@ -49,5 +51,14 @@ export const addPostActionCreator = () => ( {type: ADD_POST} )
 export const updateNewAreaTextActionCreator = (text) => ( {type: UPDATE_NEW_AREA_TEXT, newSymbol: text} )
 export const setUserProfile = (profile) => (  {type: SET_USER_PROFILE, profile } )
 
+export const setUserProfileThunk = (profile) => {
+
+  return (dispatch) => {
+
+    APIsetUserProfile(profile).then(response => {
+      dispatch(setUserProfile(response.data))
+    })
+  }
+}
 
 export default profileReducer

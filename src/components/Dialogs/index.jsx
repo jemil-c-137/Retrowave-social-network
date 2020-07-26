@@ -2,11 +2,12 @@ import React from "react";
 import styles from './Dialogs.module.css';
 import DialogueItem from "./DialogItems";
 import Message from "./DialogMessages";
+import Redirect from "react-router-dom/es/Redirect";
 
 
 
 const Dialogues = (props) => {
-
+  debugger
   let dialogElements = props.messagesPage.dialogsData.map( dialog => <DialogueItem name={dialog.name} id={dialog.id} ava={dialog.avatar}/> )
   let dialogMessages = props.messagesPage.messageData.map( message => <Message text={message.message}/>)
 
@@ -19,6 +20,7 @@ const Dialogues = (props) => {
     props.newMessageText(text)
 
   }
+
 
   return (
     <div className={styles.dialoguesWrapper}>

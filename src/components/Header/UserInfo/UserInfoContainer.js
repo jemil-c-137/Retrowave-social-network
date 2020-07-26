@@ -1,14 +1,13 @@
 import React from "react";
 import UserInfo from "./UserInfo";
 import connect from "react-redux/lib/connect/connect";
-import {AxiosInstance as axios} from "axios";
+import {getAuth} from "../../../api/api";
 
 
 class UserInfoContainer extends React.Component {
 
   componentDidMount() {
-    axios.get('https://social-network.samuraijs.com/api/1.0/auth/me')
-      .then(response => {
+    getAuth().then(response => {
         this.props.setUserLogin(response.data.login)
       })
   }
