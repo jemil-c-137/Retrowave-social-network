@@ -6,7 +6,7 @@ import {withAuthRedirect} from "../hoc/authRedirect";
 import {compose} from "redux";
 
 let mapStateToProps = (state) => {
-  debugger;
+
   return {
     messagesPage: state.messagesPage,
     isAuth: state.auth.isAuth
@@ -24,5 +24,5 @@ let mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default compose(connect(mapStateToProps, mapDispatchToProps),withAuthRedirect)(Dialogues)
+export default compose(connect(mapStateToProps, mapDispatchToProps),withAuthRedirect, )(Dialogues)
 

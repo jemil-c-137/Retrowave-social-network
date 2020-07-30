@@ -1,13 +1,13 @@
 import React from "react";
 import UserInfo from "./UserInfo";
 import connect from "react-redux/lib/connect/connect";
-import {getAuth} from "../../../api/api";
+import {profileAPI} from "../../../api/api";
 
 
 class UserInfoContainer extends React.Component {
 
   componentDidMount() {
-    getAuth().then(response => {
+    profileAPI.getAuth().then(response => {
         this.props.setUserLogin(response.data.login)
       })
   }

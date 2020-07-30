@@ -40,8 +40,8 @@ const mapDispatchToProps = (dispatch) => {
     onAreaChange: (text) => {
       dispatch(updateNewAreaTextActionCreator(text))
     },
-    addPost: () => {
-      dispatch(addPostActionCreator())
+    addPost: (text) => {
+      dispatch(addPostActionCreator(text))
     }
   }
 }

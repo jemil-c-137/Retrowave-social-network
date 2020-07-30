@@ -1,8 +1,10 @@
-import {APIsetUserProfile} from "../api/api";
+import {profileAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_AREA_TEXT = "UPDATE-NEW-AREA-TEXT";
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const SET_USER_PROFILE ="SET_USER_PROFILE";
+const SET_USER_STATUS = 'SET_USER_STATUS';
+const SET_NEW_STATUS = 'SET_NEW_STATUS';
 
 let initialState = {
 
@@ -16,47 +18,83 @@ let initialState = {
     {id:6, text: "Bye", value: 1984},
     {id:6, text: "Bye", value: 1984}
   ],
-  newAreaText: "",
+  newPostText: "",
   profile: null,
+  status: "",
 }
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST: {
+
       let newPost = {
         id: 5,
-        text: state.newAreaText,
+        text: action.newPostText,
         value: 2
+      };
+
+      return {
+        ...state,
+        postsData: [...state.postsData, newPost],
       }
-      let stateCopy = {...state};
-      stateCopy.postsData = [...state.postsData];
-      stateCopy.postsData.push(newPost);
-      stateCopy.newAreaText = '';
-      return stateCopy
+
     }
-    case UPDATE_NEW_AREA_TEXT: {
-      let stateCopy = {...state}
-      stateCopy.newAreaText = action.newSymbol;
-      return stateCopy
-    }
+   /*
+    case UPDATE_NEW_POST_TEXT: {
+      return {
+        ...state,
+        newPostText: action.newText
+      }
+
+    }*/
     case SET_USER_PROFILE: {
       return  {...state, profile: action.profile}
+    }
+    case SET_USER_STATUS: {
+      return {...state, status: action.userId}
+    }
+    case SET_NEW_STATUS: {
+      return {...state, status: action.status}
     }
     default:
       return state
   }
 }
 
-export const addPostActionCreator = () => ( {type: ADD_POST} )
-export const updateNewAreaTextActionCreator = (text) => ( {type: UPDATE_NEW_AREA_TEXT, newSymbol: text} )
-export const setUserProfile = (profile) => (  {type: SET_USER_PROFILE, profile } )
+export const addPostActionCreator = (text) => ( {type: ADD_POST, newPostText: text} )
 
+export const updateNewAreaTextActionCreator = (text) => ( {type: UPDATE_NEW_POST_TEXT, newText: text} )
+export const setUserProfile = (profile) => (  {type: SET_USER_PROFILE, profile } )
+export const setUserStatus = (userId) => ( {type: SET_USER_STATUS, userId} )
+export const setNewUserStatus = (status) => ( {type: SET_NEW_STATUS, status})
+
+//thunks
 export const setUserProfileThunk = (profile) => {
+  return (dispatch) => {
+   profileAPI.setUser(profile).then(response => {
+      dispatch(setUserProfile(response.data))
+    })
+  }
+}
+
+export const getUserStatusThunk = (userId) => {
+  return (dispatch) => {
+    profileAPI.getStatus(userId).then(response => {
+      dispatch(setUserStatus(response.data))
+    })
+  }
+}
+
+export const updateUserStatusThunk = (status) => {
 
   return (dispatch) => {
+    profileAPI.updateStatus(status).then(response => {
+      if(response.data.resultCode === 0) {
+        dispatch(setNewUserStatus(status))
+      } else {
+        alert("Update Status Error")
+      }
 
-    APIsetUserProfile(profile).then(response => {
-      dispatch(setUserProfile(response.data))
     })
   }
 }

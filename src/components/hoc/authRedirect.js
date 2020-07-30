@@ -3,6 +3,7 @@ import Redirect from "react-router-dom/es/Redirect";
 import {connect} from "react-redux";
 
 const mapStateToPropsForRedirect = (state) => {
+  debugger;
 
   return {
 
@@ -11,6 +12,7 @@ const mapStateToPropsForRedirect = (state) => {
 }
 
 export const withAuthRedirect = (Component) => {
+
 
   class RedirectComponent extends React.Component {
     render() {

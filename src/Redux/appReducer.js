@@ -1,29 +1,23 @@
-import {authApi} from "../api/api";
-import {stopSubmit} from "redux-form";
+import {getAuthThunk} from "./authReducer";
 
 
-const SET_USER_DATA = 'SET_USER_DATA';
+const GET_INITIALIZED = 'GET_INITIALIZED';
 
 
 let initialState = {
-  userId: null,
-  email: null,
-  login: null,
-  isAuth: false
-
+  initialized: false
 }
 
 
-const authReducer = (state = initialState, action) => {
+const appReducer = (state = initialState, action) => {
 
   // actions for dispatch
   switch (action.type) {
-    case SET_USER_DATA: {
+    case GET_INITIALIZED: {
 
       return {
         ...state,
-        ...action.data,
-        isAuth: action.data.isAuth
+        initialized: true
       }
     }
     default:
@@ -34,10 +28,23 @@ const authReducer = (state = initialState, action) => {
 
 
 // Action creators
-export const setUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, data: {userId, email, login, isAuth}})
+export const getInitializedAC = () => ({type: GET_INITIALIZED})
+
+export const initializeApp = () => (dispatch) => {
+
+  let getAuthPromise = dispatch(getAuthThunk())
+  Promise.all([getAuthPromise]).then(
+    dispatch(getInitializedAC())
+  )
+
+}
+
+/*
+
+
 
 export const getAuthThunk = () => {
-
+  debugger;
 
   return (dispatch) => {
 
@@ -73,6 +80,7 @@ export const logoutUser = () => (dispatch) => {
       }
     })
 }
+*/
 
 
-export default authReducer
+export default appReducer

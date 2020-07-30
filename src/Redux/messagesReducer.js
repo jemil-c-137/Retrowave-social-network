@@ -21,21 +21,19 @@ let initialState = {
 const messagesReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_MESSAGE: {
-      let message = {
-        id: 6,
-        message: state.newMessageText
+      let body = state.newMessageText
+      return {
+        ...state,
+        newMessageText: '',
+        messageData: [...state.messageData, {id: 6, message: body}]
       }
-      let stateCopy = {...state}
-      stateCopy.messageData = [...state.messageData]
-      stateCopy.messageData.push(message);
-      stateCopy.newMessageText = '';
-      return stateCopy;
     }
 
     case UPDATE_MESSAGE_TEXT: {
-      let stateCopy = {...state}
-      stateCopy.newMessageText = action.newSymbol;
-      return state;
+      return {
+        ...state,
+        newMessageText: action.newText
+      }
     }
 
     default:
@@ -44,6 +42,6 @@ const messagesReducer = (state = initialState, action) => {
 }
 
 export const addMessageActionCreator = () => ( {type: ADD_MESSAGE} )
-export const updateMessageTextActionCreator = (text) => ( {type: UPDATE_MESSAGE_TEXT, newSymbol: text} )
+export const updateMessageTextActionCreator = (text) => ( {type: UPDATE_MESSAGE_TEXT, newText: text} )
 
 export default messagesReducer
