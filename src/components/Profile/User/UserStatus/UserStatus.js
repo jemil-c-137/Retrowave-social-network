@@ -1,71 +1,36 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {bindActionCreators} from "redux";
+import {setNewUserStatus} from "../../../../Redux/profileReducer";
 
 
+const UserStatus = (props) => {
+  let [editMode, setEditMode] = useState(false);
+  let [status, setStatus] = useState(props.status)
 
-class UserStatus extends React.Component {
+  useEffect( () => {
+    status = props.status
+  }, [])
 
-
-  state = {
-    editMode: false,
-    status: this.props.status
+  const getNewStatus = () => {
+    props.newStatus(status)
+    setEditMode(false)
   }
-
-  activeEdit = () => {
-
-    this.setState( {
-      editMode: true,
-
-    })
-
+  const onStatusChange = (e) => {
+    setStatus(e.currentTarget.value)
   }
-
-  deactiveEdit = (e) => {
-
-    if (e.key === 'Enter') {
-      this.setState( {
-        editMode: false,
-      })
-      this.props.newStatus(this.state.status)
-    } else {
-      this.setState( {
-        editMode: false,
-      })
-      this.props.newStatus(this.state.status)
-    }
-  }
-  onStatusChange = (e) => {
-
-    this.setState( {
-      status: e.currentTarget.value
-    })
-}
-
-componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.status !== this.props.status ) {
-      this.setState( {
-        status: this.props.status
-      })
-    }
-}
-
-
-  render() {
-
-    return (
-      <div>
-        <div> { !this.state.editMode && <span onClick={this.activeEdit}>{this.props.status || 'no status'}</span>}
-
-        </div>
-        <div> { this.state.editMode && <input
-                                              autoFocus={true}
-                                              onBlur={this.deactiveEdit}
-                                              onChange={this.onStatusChange}
-                                              value={this.state.status} type="text"/> }
-
-        </div>
+  return (
+    <div>
+      <div> { !editMode && <span onClick={() => setEditMode(true)}>{props.status || 'no status'}</span>}
       </div>
-    )
-  }
+      <div> { editMode && <input onBlur={getNewStatus}
+                                 autoFocus={true}
+                                 value={status}
+                                 onChange={onStatusChange}
+                                 type="text"/> }
+      </div>
+    </div>
+  )
 }
+
 
 export default UserStatus

@@ -20,7 +20,7 @@ import {
   getIsFetching,
   getPageSize,
   getTotalUsersCount,
-  getUsers
+  getUsers, getUsersSelector
 } from "../../Redux/usersSelectors";
 
 
@@ -28,6 +28,7 @@ import {
 class UsersAPIComponent extends React.Component {
 
   componentDidMount() {
+    console.log('did mount')
     this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
   }
 
@@ -64,7 +65,7 @@ class UsersAPIComponent extends React.Component {
 const mapStateToProps = (state) => {
 
   return {
-    users: getUsers(state),
+    users: getUsersSelector(state),
     pageSize: getPageSize(state),
     totalUsersCount: getTotalUsersCount(state),
     currentPage: getCurrentPage(state),
