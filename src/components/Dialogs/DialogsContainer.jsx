@@ -1,4 +1,3 @@
-import React from "react";
 import {addMessageActionCreator, updateMessageTextActionCreator} from "../../Redux/messagesReducer";
 import Dialogues from "./index";
 import {connect} from "react-redux";
@@ -6,7 +5,6 @@ import {withAuthRedirect} from "../hoc/authRedirect";
 import {compose} from "redux";
 
 let mapStateToProps = (state) => {
-
   return {
     messagesPage: state.messagesPage,
     isAuth: state.auth.isAuth

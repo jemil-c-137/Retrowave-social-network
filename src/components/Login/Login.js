@@ -6,16 +6,18 @@ import {Field} from "redux-form";
 import {Textarea} from "../common/FormsControls";
 import {connect} from "react-redux";
 import {login} from "../../Redux/authReducer";
-import Redirect from "react-router-dom/es/Redirect";
 import {maxLengthCreator, required} from "../../utils/validators";
+import {Redirect} from 'react-router-dom'
+
+
 
 const maxLength30 = maxLengthCreator(30)
 
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit,  error}) => {
 
   return (
 
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div><Field name={'login'} placeholder={'login'} type={'input'} component={Textarea} validate={[required, maxLength30]}/></div>
       <div><Field name={'password'} placeholder={'password'} type={'input'} component={Textarea} validate={[required, maxLength30]}/></div>
       <div><Field name={'rememberMe'} component={'input'} type={"checkbox"}/>Remember me</div>
@@ -24,8 +26,8 @@ const LoginForm = (props) => {
         <button>
           sign in
         </button>
-        {props.error && <div className={styles.formSummaryError}>
-          {props.error /* error text from stopSubmit*/}
+        {error && <div className={styles.formSummaryError}>
+          {error /* error text from stopSubmit*/}
         </div>}
       </div>
     </form>
@@ -35,14 +37,13 @@ const LoginForm = (props) => {
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
 
-const Login = (props) => {
+const Login = ({login, isAuth}) => {
 
   const onSubmit = (formData) => {
-    debugger;
-    props.login(formData.login, formData.password)
+    login(formData.login, formData.password)
   }
 
-  if(props.isAuth) {
+  if(isAuth) {
     return <Redirect to={'/profile'}/>
   }
 

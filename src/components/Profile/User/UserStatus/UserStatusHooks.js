@@ -19,19 +19,12 @@ class UserStatus extends React.Component {
 
   }
 
-  deactiveEdit = (e) => {
-
-    if (e.key === 'Enter') {
+  deactiveEdit = () => {
       this.setState( {
         editMode: false,
       })
+    debugger
       this.props.newStatus(this.state.status)
-    } else {
-      this.setState( {
-        editMode: false,
-      })
-      this.props.newStatus(this.state.status)
-    }
   }
   onStatusChange = (e) => {
 

@@ -11,7 +11,7 @@ import {
   setTotalUsersCount,
   setUsers, toggleFollowingProgress,
   toggleIsFetching,
-  unFollow, unFollowThunk
+  unFollow, unFollowThunk,
 } from "../../Redux/users-reducer";
 import {withAuthRedirect} from "../hoc/authRedirect";
 import {
@@ -28,8 +28,8 @@ import {
 class UsersAPIComponent extends React.Component {
 
   componentDidMount() {
-    console.log('did mount')
-    this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
+    const {currentPage, pageSize} = this.props
+    this.props.getUsersThunkCreator(currentPage, pageSize)
   }
 
   onPageChanged = (p) => {
@@ -49,11 +49,8 @@ class UsersAPIComponent extends React.Component {
                currentPage={this.props.currentPage}
                onPageChanged={this.onPageChanged}
                users={this.props.users}
-               unFollow={this.props.unFollow}
-               followUser={this.props.followUser}
-
                usersInProgress={this.props.usersInProgress}
-               followThunk={this.props.followThunk}
+                followThunk={this.props.followThunk}
                unFollowThunk={this.props.unFollowThunk}
                followingInProgress={this.props.followingInProgress}
         />
@@ -82,8 +79,9 @@ let mapDispatchToProps = {
   toggleIsFetching,
   toggleFollowingProgress,
   getUsersThunkCreator,
-  followThunk,
-  unFollowThunk,
+ followThunk,
+ unFollowThunk,
+
 }
 export default withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent))
 

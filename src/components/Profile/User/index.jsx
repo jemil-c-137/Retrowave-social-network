@@ -3,23 +3,23 @@ import classes from './User.module.css'
 import Preloader from "../../common/Preloader";
 import UserStatus from "./UserStatus/UserStatus";
 
-const User = (props) => {
-  if (!props.profile) {
+const User = ({profile, updateStatus, status}) => {
+  if (!profile) {
     return <Preloader />
   }
   return (
 
     <div className={classes.container}>
       <div className={classes.avatar}>
-        <img src={props.profile.photos.large} alt=""/>
+        <img src={profile.photos.large} alt=""/>
       </div>
       <div>
-        <UserStatus newStatus={props.updateStatus} status={props.status}/>
+        <UserStatus newStatus={updateStatus} status={status}/>
       </div>
       <div>
-        <p className={`${classes.text} ${classes.title}`}>{props.profile.fullName}</p>
-        <p className={classes.text}>{props.profile.aboutMe}</p>
-        <p className={classes.text}>{props.profile.lookingForAJob ? props.profile.lookingForAJobDescription : ''}</p>
+        <p className={`${classes.text} ${classes.title}`}>{profile.fullName}</p>
+        <p className={classes.text}>{profile.aboutMe}</p>
+        <p className={classes.text}>{profile.lookingForAJob ? profile.lookingForAJobDescription : ''}</p>
         <p className={classes.text}>Education: MIT'20</p>
         <p className={classes.text}>website: it-kamasutra.com</p>
       </div>

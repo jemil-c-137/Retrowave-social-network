@@ -5,6 +5,7 @@ const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const SET_USER_PROFILE ="SET_USER_PROFILE";
 const SET_USER_STATUS = 'SET_USER_STATUS';
 const SET_NEW_STATUS = 'SET_NEW_STATUS';
+const DELETE_POST = 'DELETE_POST';
 
 let initialState = {
 
@@ -56,6 +57,9 @@ const profileReducer = (state = initialState, action) => {
     case SET_NEW_STATUS: {
       return {...state, status: action.status}
     }
+    case DELETE_POST: {
+      return {...state, postsData: state.postsData.map(p => p.id !== action.postId)}
+    }
     default:
       return state
   }
@@ -67,36 +71,25 @@ export const updateNewAreaTextActionCreator = (text) => ( {type: UPDATE_NEW_POST
 export const setUserProfile = (profile) => (  {type: SET_USER_PROFILE, profile } )
 export const setUserStatus = (userId) => ( {type: SET_USER_STATUS, userId} )
 export const setNewUserStatus = (status) => ( {type: SET_NEW_STATUS, status})
+export const deletePost = (postId) => ({type: DELETE_POST, postId})
 
 //thunks
-export const setUserProfileThunk = (profile) => {
-  return (dispatch) => {
-   profileAPI.setUser(profile).then(response => {
+export const setUserProfileThunk = (profile) => async (dispatch) => {
+   const response = await profileAPI.setUser(profile)
       dispatch(setUserProfile(response.data))
-    })
-  }
 }
 
-export const getUserStatusThunk = (userId) => {
-  return (dispatch) => {
-    profileAPI.getStatus(userId).then(response => {
+export const getUserStatusThunk = (userId) => async (dispatch) => {
+  const response = await profileAPI.getStatus(userId)
       dispatch(setUserStatus(response.data))
-    })
-  }
 }
 
-export const updateUserStatusThunk = (status) => {
-
-  return (dispatch) => {
-    profileAPI.updateStatus(status).then(response => {
+export const updateUserStatusThunk = (status) => async (dispatch) => {
+   const response = await profileAPI.updateStatus(status)
       if(response.data.resultCode === 0) {
         dispatch(setNewUserStatus(status))
-      } else {
-        alert("Update Status Error")
-      }
-
-    })
-  }
+        return
+      } alert("Update Status Error")
 }
 
 export default profileReducer

@@ -1,43 +1,32 @@
-import {getAuthThunk} from "./authReducer";
+import { getAuthThunk } from "./authReducer";
 
-
-const GET_INITIALIZED = 'GET_INITIALIZED';
-
+const GET_INITIALIZED = "GET_INITIALIZED";
 
 let initialState = {
-  initialized: false
-}
-
+  initialized: false,
+};
 
 const appReducer = (state = initialState, action) => {
-
   // actions for dispatch
   switch (action.type) {
     case GET_INITIALIZED: {
-
       return {
         ...state,
-        initialized: true
-      }
+        initialized: true,
+      };
     }
     default:
-      return state
+      return state;
   }
-}
-
-
+};
 
 // Action creators
-export const getInitializedAC = () => ({type: GET_INITIALIZED})
+export const getInitializedAC = () => ({ type: GET_INITIALIZED });
 
 export const initializeApp = () => (dispatch) => {
-
-  let getAuthPromise = dispatch(getAuthThunk())
-  Promise.all([getAuthPromise]).then(
-    dispatch(getInitializedAC())
-  )
-
-}
+  let getAuthPromise = dispatch(getAuthThunk());
+  Promise.all([getAuthPromise]).then(dispatch(getInitializedAC()));
+};
 
 /*
 
@@ -82,5 +71,4 @@ export const logoutUser = () => (dispatch) => {
 }
 */
 
-
-export default appReducer
+export default appReducer;
