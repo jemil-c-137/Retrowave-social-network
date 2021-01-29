@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e9da91c902d255bce4e5654815b70ac7",
+    "revision": "7f8824ea578dc8222171947f7d39fd73",
     "url": "/jemil-c-137/Retrowave-social-network/index.html"
   },
   {
@@ -12,7 +12,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/jemil-c-137/Retrowave-social-network/static/css/4.ec4635d7.chunk.css"
   },
   {
-    "revision": "66caad35eaa36b7376ca",
+    "revision": "fe0150e7bf0860404896",
     "url": "/jemil-c-137/Retrowave-social-network/static/css/main.584ad0b7.chunk.css"
   },
   {
@@ -32,8 +32,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/jemil-c-137/Retrowave-social-network/static/js/4.09708bb6.chunk.js"
   },
   {
-    "revision": "66caad35eaa36b7376ca",
-    "url": "/jemil-c-137/Retrowave-social-network/static/js/main.9d3fd980.chunk.js"
+    "revision": "fe0150e7bf0860404896",
+    "url": "/jemil-c-137/Retrowave-social-network/static/js/main.c33689bd.chunk.js"
   },
   {
     "revision": "8159f0f9cc393fc2a72e",

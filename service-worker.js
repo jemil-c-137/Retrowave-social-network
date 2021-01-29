@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/jemil-c-137/Retrowave-social-network/precache-manifest.37a65a6cec98be3b86fca8e72e81900e.js"
+  "/jemil-c-137/Retrowave-social-network/precache-manifest.19187f333484e4da9a234d36bf7a386b.js"
 );
 
 self.addEventListener('message', (event) => {
